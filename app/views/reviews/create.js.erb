@@ -1,0 +1,18 @@
+console.log("Hello from create.js.erb")
+
+function renderReview(reviewHTML) {
+  const reviews = document.getElementById('reviews');
+  reviews.insertAdjacentHTML('afterbegin', reviewHTML);
+}
+
+function refreshForm(formHTML) {
+  const reviewForm = document.getElementById('new_review');
+  reviewForm.innerHTML = formHTML;
+}
+
+<% if @review.errors.any? %>
+  refreshForm('<%= j render "reviews/form", restaurant: @restaurant, review: @review %>')
+<% else %>
+  renderReview('<%= j render @review %>')
+  refreshForm('<%= j render "reviews/form", restaurant: @restaurant, review: Review.new %>')
+<% end %>

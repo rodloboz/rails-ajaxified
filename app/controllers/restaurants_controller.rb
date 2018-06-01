@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: :show
+  before_action :set_restaurant, only: [:show, :destroy]
 
   def index
     @restaurants = Restaurant.all
@@ -8,6 +8,10 @@ class RestaurantsController < ApplicationController
   def show
     @review = Review.new
     @reviews = @restaurant.reviews.order(created_at: :desc)
+  end
+
+  def destroy
+    @restaurant.destroy
   end
 
   private
